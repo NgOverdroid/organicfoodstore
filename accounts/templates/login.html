@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <title>Document</title>
+</head>
+<body class="body-login">
+    <div class="signup-logo">
+        <a href="./homepage.html">
+            <img class="logo__img" src="./img/plant 1.svg" alt="">
+            <span class="logo__text">ORGANIC SHOP</span>
+        </a>
+    </div>
+    <div class="formdn">
+        <form class="js-LoginModal" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="" class="formdn__tieude--fontto">Đăng nhập</label> 
+            <div class="auth-form__group">
+                <small></small>
+                <input id="loginUsername" type="text" placeholder="Tên tài khoản" class="formdn__email" name="username">
+            </div>
+            <div class="auth-form__group">
+                <small></small> 
+                <input id="loginPassword" type="password" placeholder="Mật khẩu" class="formdn__mk" name="password"> 
+            </div>
+            <button type="submit">Đăng nhập</button> 
+        </form>
+            <p>Không có tài khoản? <span class="login"> <a href="{% url 'signup' %}">Nhấp để tạo tài khoản </a></span></p>
+    </div>
+    <script src="./js/login.js"></script>
+</body>
+</html>

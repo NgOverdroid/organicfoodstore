@@ -1,0 +1,86 @@
+/*CSS cho form đăng nhập*/
+.body-login{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.signup-logo {
+    padding-bottom: 60px;
+    width: 100%;
+    text-align: center;
+}
+
+.signup-logo a {
+    text-decoration: none;
+}
+
+.signup-logo span{
+    font-size: 30px;
+    color: white;
+}
+.formdn{
+    border: solid 2px #f2f2f2;
+    margin: 0 auto;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px 40px;
+}
+.formdn__tieude--fontto{
+    display:block;
+    font-size: 30px;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+}
+.formdn__nhotoi{
+    display: inline-block;
+}
+.formdn__quenmk{
+    display: inline-block;
+    float: right;
+}
+.formdn__email, .formdn__mk{
+    width: 100%;
+    display: block;
+    margin: 0 auto 20px auto;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 16px 10px;
+}
+.formdn__div3{
+    height:40px;
+}
+a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+button{
+    display: block;
+    width: 100%;
+    margin: 0 auto 10px auto;
+    padding: 16px 0;
+    border: none;
+    color:white;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #00B207;
+    cursor: pointer;
+}
+input{
+    margin-bottom: 10px;
+}
+p{
+    text-align: center;
+    padding:20px 20px 10px 20px;
+}
+.login{
+    font-weight: bold;
+}
+.body-login{
+    background-image: url("https://images.unsplash.com/photo-1598030343246-eec71cb44231?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+

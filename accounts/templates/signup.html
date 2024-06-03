@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Document</title>
+</head>
+<body class="body-signup">
+    <div class="signup-logo">
+        <a href="./homepage.html">
+            <img class="logo__img" src="./img/plant 1.svg" alt="">
+            <span class="logo__text">ORGANIC SHOP</span>
+        </a>
+    </div>
+    
+    <div class="formdk">
+        <form class="js-RegisterModal" method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <label for="" class="tieude-form">Đăng ký</label> 
+            {{ form.as_p }}
+            <button type="submit">Tạo tài khoản</button> 
+            <p>Đã có tài khoản? <span class="login"> <a href="{% url 'login' %}">Nhấp để đăng nhập</a></span></p>
+        </form>
+    </div>
+    <script src="./js/signup.js"></script>
+    <script src="./js/login.js"></script>
+</body>
+</html>

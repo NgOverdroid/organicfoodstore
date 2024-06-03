@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/acc.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="login_alert" id="loginAlert">
+           {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    <header>
+        <div class="header__top">
+            <div class="location">
+                <i class="location__icon fa-solid fa-location-dot"></i>
+                <span class="location__text">Khu phố 6, P.Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh.</span>
+            </div>
+
+            <div class="validation">
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="validation__register">Đăng xuất</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="validation__register">Đăng ký</a>
+                <hr>
+                <a href="{% url 'login' %}" class="validation__login">Đăng nhập</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="header__center">
+            <a href="./homepage.html" class="logo">
+                <img class="logo__img" src="./img/plant 1.svg" alt="">
+                <span class="logo__text">ORGANIC SHOP</span>
+            </a>
+
+            <form method="POST" action="{% url 'search' %}">
+                <div class="search-box">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="text" class="search-box__input" placeholder="Tìm kiếm sản phẩm" name="searched">
+                    <button class="search-box__btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="wishlist-cart">
+                <a href="./wish-list.html"><i class="fa-regular fa-heart"></i></a>
+                <hr>
+                <a class="js-popup-ticket" href="#"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+        
+        <div class="navbar">
+            <ul>
+                <li>
+                    <a href="./homepage.html">Trang chủ</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="./shop.html">Sản phẩm</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="./bloglist.html">Bài viết</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="./about.html">Giới thiệu</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="./contact.html">Liên hệ</a>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="cart-popup-wrapper js-popup">
+        <div class="cart-popup js-popup-container">
+            <div class="cart-popup__up">
+                <div class="cart-popup__heading">
+                    <h2>Giỏ hàng</h2>
+                    <i class="fa-regular fa-x js-close-popup"></i>
+                </div>
+                
+                <div class="cart-popup__products">
+                    <div class="cart-popup__product">
+                        <img class="cart-popup__product__img" src="./img/cải thìa.png" alt="">
+                        <div class="cart-popup__product__info">
+                            <p>Cải thìa</p>
+                            <p>
+                                <span class="product__weight">1kg x </span>
+                                <span class="product__price">10.000đ</span>
+                            </p>
+                        </div>
+                        <img class="cart-popup__product-close" src="./img/Close.svg" alt="">
+                    </div>
+                    <div class="line"></div>
+                    <div class="cart-popup__product">
+                        <img class="cart-popup__product__img" src="./img/ot chuong do.png" alt="">
+                        <div class="cart-popup__product__info">
+                            <p>Ớt chuông đỏ</p>
+                            <p>
+                                <span class="product__weight">1kg x </span>
+                                <span class="product__price">10.000đ</span>
+                            </p>
+                        </div>
+                        <img class="cart-popup__product-close" src="./img/Close.svg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-popup__footer">
+                <div class="cart-popup__footer__info">
+                    <div>2 sản phẩm</div>
+                    <div class="cart-popup__footer__price">20.000đ</div>
+                </div>
+                <button class="cart-popup__footer__checkout">Thanh toán</button> <br>
+                <button class="cart-popup__footer__cart">Xem giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+        
+    <div class="address-body">
+        <div class="nav-link">
+            <div class="nav-link-text">
+                <a href="./homepage.html"><i class="fa-solid fa-house"></i></a>
+                <i class="right fa-solid fa-chevron-right"></i>
+                <a class="nav-link--selected" href="">Thông tin cá nhân</a>
+            </div>
+        </div>
+        <div class="address-body__profile">
+          <div class="address-wrapper">
+            <div class="address-wrapper__menu">
+                <div class="title">Thông tin cá nhân</div>
+                <div class="list">
+                    <div class="list__item selected_item">
+                        <a href="./acc.html">
+                            <i class="list__icon fa-solid fa-address-card"></i>
+                            <span>Tài khoản</span>
+                        </a>
+                    </div>
+                    <div class="list__item">
+                        <a href="./sodiachi.html">
+                            <i class="list__icon fa-solid fa-address-book"></i>
+                            <span>Sổ địa chỉ</span>
+                        </a>
+                    </div>
+                    <div class="list__item ">
+                        <a href="./orderhistory.html">
+                            <i class="list__icon fa-solid fa-wallet"></i>
+                            <span>Lịch sử đặt hàng</span>
+                        </a>
+                    </div>
+                    <div class="list__item">
+                        <a href="./account wish-list.html">
+                            <i class="list__icon fa-solid fa-heart "></i>
+                            <span>Danh sách yêu thích</span>
+                        </a>
+                    </div>
+                    <div class="list__item">
+                        <a href="./homepage.html">
+                            <i class="list__icon fa-solid fa-arrow-right-from-bracket"></i>
+                            <span>Đăng xuất</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="profile">
+            <div class="profilename">
+                <div class="anh">
+                    <img class="anh__icon" src="./img/nghia.jpg" alt="">
+                </div>
+                <p class="ten profilename__ele">Lê Đức Nghĩa</p>    
+            </div>
+            <div class="profileinfo">
+                <p class="ten profileinfo__ele">Lê Đức Nghĩa</p>
+                <p class="diachi profileinfo__ele">Địa chỉ: 08 Hà Văn Tính, Hòa Khánh Nam, Liên Chiểu, Đà Nẵng</p>
+                <p class="email profileinfo__ele">Email: cexexoh956@ustorp.com</p>
+                <p class="sdt profileinfo__ele">Sđt: 0941867783</p>
+                <a class="edit profileinfo__ele" href="{% url 'update_user' %}">Sửa thông tin</a>
+            </div>
+            <div class="address-wrapper__order-history">
+                <div class="title">
+                    <i class="fa-solid fa-clock-rotate-left title__icon"></i>
+                    Lịch sử đặt hàng
+                </div>
+                <div class="content">
+                    <div class="content__item header">
+                        <div>ID đơn hàng</div>
+                        <div>Ngày</div>
+                        <div>Tổng giá</div>
+                        <div>Tình trạng</div>
+                        <div></div>
+                    </div>
+                    <div class="content__item">
+                        <div>#3933</div>
+                        <div>1/11/2023</div>
+                        <div>331.300đ (5 sản phẩm)</div>
+                        <div>Đang xử lý</div>
+                        <div class="details">
+                            <a href="./order-detail.html">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__item">
+                        <div>#5054</div>
+                        <div>29/10/2023</div>
+                        <div>61.400đ (1 sản phẩm)</div>
+                        <div>Đang vận chuyển</div>
+                        <div class="details">
+                            <a href="">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__item">
+                        <div>#5028</div>
+                        <div>23/10/2023</div>
+                        <div>613.500đ (4 sản phẩm)</div>
+                        <div>Hoàn thành</div>
+                        <div class="details">
+                            <a href="">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__item">
+                        <div>#4600</div>
+                        <div>19/10/2023</div>
+                        <div>85.900đ (1 sản phẩm)</div>
+                        <div>Hoàn thành</div>
+                        <div class="details">
+                            <a href="">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__item">
+                        <div>#4152</div>
+                        <div>10/10/2023</div>
+                        <div>1.418.500đ (13 sản phẩm)</div>
+                        <div>Hoàn thành</div>
+                        <div class="details">
+                            <a href="">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__item">
+                        <div>#8811</div>
+                        <div>5/10/2023</div>
+                        <div>846.700đ (7 sản phẩm)</div>
+                        <div>Hoàn thành</div>
+                        <div class="details">
+                            <a href="">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__item">
+                        <div>#3536</div>
+                        <div>28/9/2023</div>
+                        <div>1.374.300đ (2 sản phẩm)</div>
+                        <div>Hoàn thành</div>
+                        <div class="details">
+                            <a href="">Chi tiết</a>
+                        </div>
+                    </div>
+                    <div class="content__next-page">
+                        
+                        <a href="#" class="numpage">Xem thêm</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer__top">
+            <div class="box">
+                <a href="" class="logo">
+                    <img class="logo__img" src="./img/plant 1.svg" alt="">
+                    <span class="logo__text">ORGANIC SHOP</span>
+                </a>
+                <p class="contact-info">
+                    <span>0123456789</span> 
+                    hoặc 
+                    <span>abcd@gmail.com</span>
+                </p>
+                <div class="social-icon">
+                    <a href="">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+    
+            <div class="box">
+                <h2 class="box__header">Tài khoản của tôi</h2>
+                <ul>
+                    <li>Thông tin tài khoản</li>
+                    <li>Lịch sử đặt hàng</li>
+                    <li>Giỏ hàng</li>
+                    <li>Danh sách yêu thích</li>
+                </ul>
+            </div>
+    
+            <div class="box">
+                <h2 class="box__header">Trợ giúp</h2>
+                <ul>
+                    <li>Liên lạc</li>
+                    <li>Điều khoản</li>
+                    <li>Chính sách bảo mật</li>
+                    <li>Hướng dẫn mua hàng</li>
+                </ul>
+            </div>
+    
+            <div class="box">
+                <h2 class="box__header">Danh mục</h2>
+                <ul>
+                    <li>Rau củ quả</li>
+                    <li>Trái cây</li>
+                    <li>Các loại hạt</li>
+                    <li>Nước ép rau củ</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h2 class="box__header">Tải ứng dụng của chúng tôi</h2>
+                <div class="download">
+                    <a class="ggplay" href="">
+                        <i class="fa-brands fa-google-play ggplay__icon"></i>
+                        <div class="ggplay__text">
+                            <span>Tải xuống trên</span> <br>
+                            Google Play
+                        </div>
+                    </a>
+
+                    <a class="appstore" href="">
+                        <i class="fa-brands fa-apple appstore__icon"></i>
+                        <div class="appstore__text">
+                            <span>Tải xuống trên</span> <br>
+                            App Store
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div>© 2023 - Bản quyền thuộc về Organic Shop</div>
+        </div>
+    </footer>
+    <script src="./js/closePopup.js"></script>
+    <script src="./js/proceedToCheckout.js"></script>
+</body>
+</html>

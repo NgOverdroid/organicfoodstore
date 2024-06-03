@@ -1,0 +1,140 @@
+/*Bộ lọc kết quả*/
+.filter-option{
+    padding-left:160px;
+    padding-right:160px;
+}
+.filter-option form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.filter-option__child {
+    padding:10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: solid 1px #dbdbdb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#price_filter{
+    position: relative;
+    cursor: pointer;
+    margin-left: 5px;
+    height: 38px;
+}
+#price_filter__rangeslider{
+    position: absolute;
+    top:40px;
+    left:0;
+    background-color: white;
+    padding: 15px;
+    border: solid 1px #dbdbdb;
+    display: none;
+    z-index: 1;
+}
+#price_filter__rangeslider p,
+#price_filter__rangeslider label,
+#price_filter__rangeslider input {
+    margin: 5px;
+}
+.filter-result{
+    border-top:solid 1px #dbdbdb;
+    border-bottom:solid 1px #dbdbdb;
+}
+.filter-result p{
+    padding:16px 160px;
+}
+.filter-result__child{
+    color:#808080;
+}
+.filter-result__child--right{
+    float: right;
+}
+
+/*Feed trưng bày sản phẩm*/
+.collage{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top:10px;
+    padding:20px 160px 20px 160px;
+}
+.collage-pic{
+    width:230px;
+    position:relative;
+    border:solid 1px #E6E6E6;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-sizing: content-box;
+    background-color: white;
+}
+.collage-pic__img{
+    width:100%;
+    object-fit:fill;
+    margin-bottom: 15px;
+}
+.collage-pic__preview--hidden, .collage-pic__heart--hidden{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.collage-pic:hover .collage-pic__preview--hidden, .collage-pic:hover .collage-pic__heart--hidden {
+    opacity: 1;
+    pointer-events: auto;
+}
+.collage-pic__heart--visible {
+    position: absolute;
+    top:20px;
+    right:20px;
+    height: 35px;
+    width: 35px;
+    border: none;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+}
+.collage-pic__preview--visible {
+    position: absolute;
+    top:60px;
+    right:20px;
+    height: 35px;
+    width: 35px;
+    border: none;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+}
+.collage-pic__bag{
+    position: absolute;
+    border: solid 1px #dbdbdb;
+    top: 250px;
+    right:20px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+}
+.collage-pic__preview--visible:hover, .collage-pic__heart--visible:hover, .collage-pic__bag:hover{
+    background-color: #00B207;
+    color: white;
+}
+
+.collage-pic__name, .collage-pic p, .collage-pic__star{
+    margin: 10px 0 10px 10px;
+}
+.collage-pic__name{
+    text-decoration: none;
+    color:#4d4d4d;
+}
+.collage-pic:hover .collage-pic__name{
+    color: #00B207;
+}
+.collage-pic__star{
+    font-size: 10px;
+}
+.checked {
+    color: orange;
+}
+
