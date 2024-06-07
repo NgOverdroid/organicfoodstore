@@ -13,7 +13,7 @@ class ShippingForm(forms.ModelForm):
         exclude = ['user',]
 
 class PaymentForm(forms.Form):
-    card_name =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Tên chủ thẻ'}), required=True)
-    card_bank =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Tên ngân hàng'}), required=True)
-    card_number =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Số thẻ'}), required=True)
-    card_exp_date =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ngày hết hiệu lực'}), required=True)
+    card_name =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'billing_input', 'placeholder':'Tên chủ thẻ'}), required=True)
+    card_bank =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'billing_input', 'placeholder':'Tên ngân hàng'}), required=True)
+    card_number =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'billing_input', 'placeholder':'Số thẻ'}), required=True)
+    card_exp_date =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'billing_input', 'placeholder':'Ngày cấp thẻ'}), required=True)

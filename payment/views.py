@@ -101,10 +101,7 @@ def process_order(request):
                 # Get product ID
                 product_id = product.id
                 # Get product price
-                if product.is_sale:
-                    price = product.sale_price
-                else:
-                    price = product.price
+                price = product.price
 
                 # Get quantity
                 for key,value in quantities().items():
@@ -118,6 +115,8 @@ def process_order(request):
                 if key == "session_key":
                     # Delete the key
                     del request.session[key]
+        messages.success(request, "Đặt hàng thành công")
+        return redirect('fruits')
     else:
         messages.success(request, "Không truy cập được")
         return redirect('fruits')
@@ -160,4 +159,77 @@ def billing_info(request):
     else:
         messages.success(request, "Không truy cập được")
         return redirect('fruits')
-        
+
+def shipped_dash(request):
+	if request.user.is_authenticated:
+		orders = Order.objects.filter(shipped=True, user=request.user)
+		if request.POST:
+			status = request.POST['shipping_status']
+			num = request.POST['num']
+			# grab the order
+			order = Order.objects.filter(id=num)
+			# grab Date and time
+			now = datetime.datetime.now()
+			# update order
+			order.update(shipped=False)
+			# redirect
+			messages.success(request, "Shipping Status Updated")
+			return redirect('home')
+
+
+		return render(request, "shipped_dash.html", {"orders":orders})
+	else:
+		messages.success(request, "Dành cho người dùng có tài khoản")
+		return redirect('home')
+
+def not_shipped_dash(request):
+	if request.user.is_authenticated:
+		orders = Order.objects.filter(shipped=False, user=request.user)
+		if request.POST:
+			status = request.POST['shipping_status']
+			num = request.POST['num']
+			# Get the order
+			order = Order.objects.filter(id=num)
+			# grab Date and time
+			now = datetime.datetime.now()
+			# update order
+			order.update(shipped=True, date_shipped=now)
+			# redirect
+			messages.success(request, "Shipping Status Updated")
+			return redirect('home')
+
+		return render(request, "not_shipped_dash.html", {"orders":orders})
+	else:
+		messages.success(request, "Dành cho người dùng có tài khoản")
+		return redirect('home')
+    
+def orders(request, pk):
+	if request.user.is_authenticated:
+		# Get the order
+		order = Order.objects.get(id=pk)
+		# Get the order items
+		items = OrderItem.objects.filter(order=pk)
+
+		if request.POST:
+			status = request.POST['shipping_status']
+			# Check if true or false
+			if status == "true":
+				# Get the order
+				order = Order.objects.filter(id=pk)
+				# Update the status
+				now = datetime.datetime.now()
+				order.update(shipped=True, date_shipped=now)
+			else:
+				# Get the order
+				order = Order.objects.filter(id=pk)
+				# Update the status
+				order.update(shipped=False)
+			messages.success(request, "Shipping Status Updated")
+			return redirect('home')
+		return render(request, 'orders.html', {
+            "order":order, 
+            "items":items
+        })
+
+	else:
+		return redirect('home')

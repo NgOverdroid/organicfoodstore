@@ -20,9 +20,13 @@
             </div>
 
             <div class="validation">
-                <a href="./signup.html" class="validation__register">Đăng ký</a>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="validation__register">Đăng xuất</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="validation__register">Đăng ký</a>
                 <hr>
-                <a href="./login.html" class="validation__login">Đăng nhập</a>
+                <a href="{% url 'login' %}" class="validation__login">Đăng nhập</a>
+                {% endif %}
             </div>
         </div>
 
@@ -40,8 +44,6 @@
             </div>
 
             <div class="wishlist-cart">
-                <a href="./wish-list.html"><i class="fa-regular fa-heart"></i></a>
-                <hr>
                 <a class="js-popup-ticket" href="#"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
             </div>
         </div>
@@ -49,34 +51,33 @@
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="./homepage.html">Trang chủ</a>
+                    <a href="{% url 'home' %}">Trang chủ</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./shop.html">Sản phẩm</a>
+                    <a href="{% url 'fruits' %}">Sản phẩm</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./bloglist.html">Bài viết</a>
+                    <a href="{% url 'about' %}">Bài viết</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./about.html">Giới thiệu</a>
+                    <a href="{% url 'shipped_dash' %}">Lịch sử mua hàng</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./contact.html">Liên hệ</a>
+                    <a href="{% url 'not_shipped_dash' %}">Hàng đang giao</a>
                     <hr>
                 </li>
             </ul>
 
             <div class="phone">
                 <i class="fa-solid fa-phone-volume phone__icon"></i>
-                <span class="phone__number">0123456789</span>
             </div>
         </div>
     </header>
@@ -140,109 +141,10 @@
 
         <div class="check-out__body">
             <div class="check-out__body-left">
-                <h2>Thông tin liên lạc</h2>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Họ</p>
-                        <input type="text" placeholder="Họ của bạn">
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Tên</p>
-                        <input type="text" placeholder="Tên của bạn">
-                    </div>
-                </div>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Địa chỉ nhà</p>
-                        <input type="text" placeholder="Địa chỉ nhà">
-                    </div>
-                </div>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Địa chỉ email</p>
-                        <input type="text" placeholder="Email">
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Số điện thoại</p>
-                        <input type="text" placeholder="Số điện thoại">
-                    </div>
-                </div>  
-                <div class="line"></div>
-            </div>
-
-            <div class="check-out__body-right">
-                <h3>Tóm tắt đơn hàng</h3>
-                <div class="check-out__body-right__products">
-                    <div class="check-out__body-right__product">
-                        <div class="check-out__body-right__product__info">
-                            <img src="./img/ớt chuông.png" alt="">
-                            <p>Ớt chuông xanh  x2</p>
-                        </div>
-                        <p class="check-out__body-right__product__price">20.000đ</p>
-                    </div>
-                    <div class="check-out__body-right__product">
-                        <div class="check-out__body-right__product__info">
-                            <img src="./img/cải thìa.png" alt="">
-                            <p>Cải thìa  x2</p>
-                        </div>
-                        <p class="check-out__body-right__product__price">20.000đ</p>
-                    </div>
-                    <div class="check-out__body-right__product">
-                        <div class="check-out__body-right__product__info">
-                            <img src="./img/ot chuong do.png" alt="">
-                            <p>Ớt chuông đỏ  x2</p>
-                        </div>
-                        <p class="check-out__body-right__product__price">20.000đ</p>
-                    </div>
-                    <div class="check-out__body-right__product">
-                        <div class="check-out__body-right__product__info">
-                            <img src="./img/ot xanh.png" alt="">
-                            <p>Ớt xanh  x2</p>
-                        </div>
-                        <p class="check-out__body-right__product__price">20.000đ</p>
-                    </div>
-                </div>
-                <div class="check-out__body-right__info">
-                    <p class="check-out__body-right__info__title">Tổng tiền hàng:</p>
-                    <p class="check-out__body-right__product__price">80.000đ</p>
-                </div>
-                <div class="line"></div>
-                <div class="check-out__body-right__info">
-                    <p class="check-out__body-right__info__title">Phí vận chuyển:</p>
-                    <p class="check-out__body-right__product__price">Miễn phí</p>
-                </div>
-                <div class="line"></div>
-                <div class="check-out__body-right__info">
-                    <p class="check-out__body-right__info__title">Tổng thanh toán:</p>
-                    <p class="check-out__body-right__product__price">80.000đ</p>
-                </div>
-                <a href="{% url 'cart_summary' %}"><button id="update_order__button">Cập nhật đơn hàng</button></a>
-            </div>
-
-            <div class="check-out__body-left">
                 <h2>Thông tin thẻ</h2>
                 <form method="POST" action="{% url 'process_order' %}">
                     {% csrf_token %}
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Họ</p>
-                        <input type="text" placeholder="Họ của bạn">
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Tên</p>
-                        <input type="text" placeholder="Tên của bạn">
-                    </div>
-                </div>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Địa chỉ email</p>
-                        <input type="text" placeholder="Email">
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Số điện thoại</p>
-                        <input type="text" placeholder="Số điện thoại">
-                    </div>
-                </div>
+                {{ billing_form.as_p }}
                 <button type="submit">Đặt hàng</button>  
                 </form>
                 <div class="line"></div>

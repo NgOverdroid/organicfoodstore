@@ -1492,11 +1492,15 @@ span#btn-next {
 
 /*CHECK-OUT*/
 
+.billing_input{
+    display: block;
+}
+
 .check-out__body {
     margin: 32px 160px 40px 160px;
     color: #1A1A1A;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .check-out__body-left {
@@ -1505,6 +1509,7 @@ span#btn-next {
     border-radius: 8px;
     height: fit-content;
     padding:20px;
+    margin-right: 40px;
 }
 
 .check-out__body-left h2 {
@@ -1518,6 +1523,7 @@ span#btn-next {
 
 .check-out__body-left__item {
     width: 140px;
+    display: block;
 }
 
 .check-out__body-left__item p {

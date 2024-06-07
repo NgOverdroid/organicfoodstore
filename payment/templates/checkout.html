@@ -20,9 +20,13 @@
             </div>
 
             <div class="validation">
-                <a href="./signup.html" class="validation__register">Đăng ký</a>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="validation__register">Đăng xuất</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="validation__register">Đăng ký</a>
                 <hr>
-                <a href="./login.html" class="validation__login">Đăng nhập</a>
+                <a href="{% url 'login' %}" class="validation__login">Đăng nhập</a>
+                {% endif %}
             </div>
         </div>
 
@@ -40,43 +44,40 @@
             </div>
 
             <div class="wishlist-cart">
-                <a href="./wish-list.html"><i class="fa-regular fa-heart"></i></a>
-                <hr>
-                <a class="js-popup-ticket" href="#"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
+                <i class="fa-regular fa-ghost"></i>
             </div>
         </div>
         
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="./homepage.html">Trang chủ</a>
+                    <a href="{% url 'home' %}">Trang chủ</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./shop.html">Sản phẩm</a>
+                    <a href="{% url 'fruits' %}">Sản phẩm</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./bloglist.html">Bài viết</a>
+                    <a href="{% url 'about' %}">Bài viết</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./about.html">Giới thiệu</a>
+                    <a href="{% url 'shipped_dash' %}">Lịch sử mua hàng</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./contact.html">Liên hệ</a>
+                    <a href="{% url 'not_shipped_dash' %}">Hàng đang giao</a>
                     <hr>
                 </li>
             </ul>
 
             <div class="phone">
-                <i class="fa-solid fa-phone-volume phone__icon"></i>
-                <span class="phone__number">0123456789</span>
+                <a href="{% url 'profile' %}"><i class="fa-solid fa-user-large phone__icon"></i></a>
             </div>
         </div>
     </header>
@@ -126,7 +127,7 @@
             </div>
         </div>
     </div>
-
+    {% if cart_products %}
     <div class="check-out">
         <div class="nav-link">
             <div class="nav-link-text">
@@ -144,55 +145,8 @@
                 <form method="POST" action="{% url 'billing_info' %}">
                     {% csrf_token %}
                 {{ shipping_form.as_p }}
-                <button>Đặt hàng</button>
+                <button type="submit">Đặt hàng</button>
                 </form>
-                <!-- <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Họ</p>
-                        <input type="text" placeholder="Họ của bạn">
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Tên</p>
-                        <input type="text" placeholder="Tên của bạn">
-                    </div>
-                </div>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Tỉnh/Thành phố</p>
-                        <select id="city" aria-label=".form-select-sm">
-                            <option value="" selected>Chọn</option>           
-                        </select>
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Quận/Huyện</p>
-                        <select id="district" aria-label=".form-select-sm">
-                            <option value="" selected>Chọn</option>           
-                        </select>
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Phường/Xã</p>
-                        <select id="ward" aria-label=".form-select-sm">
-                            <option value="" selected>Chọn</option>           
-                        </select>
-                    </div>
-                </div>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Địa chỉ nhà</p>
-                        <input type="text" placeholder="Địa chỉ nhà">
-                    </div>
-                </div>
-                <div class="check-out__body-left__row">
-                    <div class="check-out__body-left__item">
-                        <p>Địa chỉ email</p>
-                        <input type="text" placeholder="Email">
-                    </div>
-                    <div class="check-out__body-left__item">
-                        <p>Số điện thoại</p>
-                        <input type="text" placeholder="Số điện thoại">
-                    </div>
-                </div> -->
-                <div class="line"></div>
             </div>
 
             <div class="check-out__body-right">
@@ -220,10 +174,6 @@
                     </div>
                 {% endfor %}
                 </div>
-                <div class="check-out__body-right__info">
-                    <p class="check-out__body-right__info__title">Tổng tiền hàng:</p>
-                    <p class="check-out__body-right__product__price">{{ totals.big_sum }}đ</p>
-                </div>
                 <div class="line"></div>
                 <div class="check-out__body-right__info">
                     <p class="check-out__body-right__info__title">Phí vận chuyển:</p>
@@ -238,91 +188,9 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="footer__top">
-            <div class="box">
-                <a href="" class="logo">
-                    <img class="logo__img" src="./img/plant 1.svg" alt="">
-                    <span class="logo__text">ORGANIC SHOP</span>
-                </a>
-                <p class="contact-info">
-                    <span>0123456789</span> 
-                    hoặc 
-                    <span>abcd@gmail.com</span>
-                </p>
-                <div class="social-icon">
-                    <a href="">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-    
-            <div class="box">
-                <h2 class="box__header">Tài khoản của tôi</h2>
-                <ul>
-                    <li>Thông tin tài khoản</li>
-                    <li>Lịch sử đặt hàng</li>
-                    <li>Giỏ hàng</li>
-                    <li>Danh sách yêu thích</li>
-                </ul>
-            </div>
-    
-            <div class="box">
-                <h2 class="box__header">Trợ giúp</h2>
-                <ul>
-                    <li>Liên lạc</li>
-                    <li>Điều khoản</li>
-                    <li>Chính sách bảo mật</li>
-                    <li>Hướng dẫn mua hàng</li>
-                </ul>
-            </div>
-    
-            <div class="box">
-                <h2 class="box__header">Danh mục</h2>
-                <ul>
-                    <li>Rau củ quả</li>
-                    <li>Trái cây</li>
-                    <li>Các loại hạt</li>
-                    <li>Nước ép rau củ</li>
-                </ul>
-            </div>
-
-            <div class="box">
-                <h2 class="box__header">Tải ứng dụng của chúng tôi</h2>
-                <div class="download">
-                    <a class="ggplay" href="">
-                        <i class="fa-brands fa-google-play ggplay__icon"></i>
-                        <div class="ggplay__text">
-                            <span>Tải xuống trên</span> <br>
-                            Google Play
-                        </div>
-                    </a>
-
-                    <a class="appstore" href="">
-                        <i class="fa-brands fa-apple appstore__icon"></i>
-                        <div class="appstore__text">
-                            <span>Tải xuống trên</span> <br>
-                            App Store
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer__bottom">
-            <div>© 2023 - Bản quyền thuộc về Organic Shop</div>
-        </div>
-    </footer>
+    {% else %}
+    <h1 style="text-align: center;">Chưa có đơn hàng</h1>
+    {% endif %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="./js/address.js"></script>
     <script src="./js/closePopup.js"></script>

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% load static %}
+{% block content %}
+<div class="filter">
+    <div class="filter-option">
+        <form action=""> 
+            <div style="display: flex; flex-direction: row;">
+                <select class="filter-option__child">
+                    <option disabled selected>Chọn sản phẩm</option>
+                    <option value="fruits">Trái cây</option>
+                    <option value="vegetables">Rau củ</option>
+                    <option value="seafood">Hải sản</option>
+                    <option value="meat">Thịt</option>
+                    <option value="carbs">Lương thực</option>
+                </select>
+            </div>
+            <div>
+                <select class="filter-option__child filter-option__child--right">
+                    <option disabled selected>Sắp xếp theo</option>
+                    <option>Giá giảm dần</option>
+                    <option>Giá tăng dần</option>
+                </select>
+            </div>
+            
+          </form>
+    </div>
+</div>
+<div class="collage">
+{% for product in products %}
+    <div class="collage-pic">
+        <a href="{% url 'product' product.id %}"><img src="{{ product.image.url }}" alt="" class="collage-pic__img"></a>
+        <a href="{% url 'product' product.id %}" class="collage-pic__name">{{ product.name }}</a>
+        <p>Giá: {{ product.price }} nghìn/kg</p>
+        <div class="collage-pic__star">
+        <span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>
+        </div>
+        <!-- <button class="collage-pic__heart--hidden collage-pic__heart--visible"><i class="fa-solid fa-heart"></i></button>
+        <button class="collage-pic__preview--hidden collage-pic__preview--visible"><i class="fa-solid fa-eye"></i></button> -->
+        <button class="collage-pic__bag" id="product_{{ product.id }}"><i class="fa-solid fa-bag-shopping"></i></button>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

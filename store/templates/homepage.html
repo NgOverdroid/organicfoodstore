@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+    <header>
+        <div class="header__top">
+            <div class="location">
+                <i class="location__icon fa-solid fa-location-dot"></i>
+                <span class="location__text">Khu phố 6, P.Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh.</span>
+            </div>
+
+            <div class="validation">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="validation__register">Đăng xuất</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="validation__register">Đăng ký</a>
+                <hr>
+                <a href="{% url 'login' %}" class="validation__login">Đăng nhập</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="header__center">
+            <a href="./homepage.html" class="logo">
+                <img class="logo__img" src="{% static 'img/plant 1.svg' %}" alt="">
+                <span class="logo__text">ORGANIC SHOP</span>
+            </a>
+
+            <form method="POST" action="{% url 'search' %}">
+                <div class="search-box">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="text" class="search-box__input" placeholder="Tìm kiếm sản phẩm" name="searched">
+                    <button class="search-box__btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                </form>
+
+            <div class="wishlist-cart">
+                <a class="js-popup-ticket" href="{% url 'cart_summary' %}"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+        
+        <div class="navbar">
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">Trang chủ</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="{% url 'fruits' %}">Sản phẩm</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="{% url 'about' %}">Giới thiệu</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="{% url 'shipped_dash' %}">Lịch sử mua hàng</a>
+                    <hr>
+                </li>
+
+                <li>
+                    <a href="{% url 'not_shipped_dash' %}">Hàng đang giao</a>
+                    <hr>
+                </li>
+            </ul>
+
+            {% if request.user.is_authenticated %}
+            <div class="phone">
+                <a href="{% url 'profile' %}"><i class="fa-solid fa-user-large phone__icon"></i></a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <div id="slider">
+        <div class="slides">
+            <div class="slide actived">
+              <div class="slide-img">
+                <img id="img" src="{% static 'img/slider1 (1).png' %}" alt="">
+              </div>
+              <div class="slide__content">
+                  <div class="text-content">
+                    <p class="text-welcome">Chào mừng đến với Organic Shop</p>
+                    <h1 class="text-heading">Cung cấp thức ăn tươi ngon và tốt cho sức khỏe</h1>
+                    <div class="text-descr">Miễn phí vận chuyển cho tất cả các đơn đặt hàng của bạn</div>
+                  </div>
+                  <a href="{% url 'fruits' %}">
+                  <button>
+                    Mua sắm ngay
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                    </a>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="homepage__feature">
+        <div class="feature__item">
+            <div class="feature__item__img">
+                <img src="{% static 'img/delivery-truck 1.svg' %}" alt="">
+            </div>
+            <div class="feature__item__text">
+                <div class="feature__item__text__heading">Miễn phí vận chuyển</div>
+                <div class="feature__item__text__descrb">Miễn phí vận chuyển tất cả các đơn đặt hàng của bạn</div>
+            </div>
+        </div>
+        <div class="feature__item">
+            <div class="feature__item__img">
+                <img src="{% static 'img/headphones 1.svg' %}" alt="">
+            </div>
+            <div class="feature__item__text">
+                <div class="feature__item__text__heading">Hỗ trợ 24/7</div>
+                <div class="feature__item__text__descrb">Luôn sẵn sàng đễ hỗ trợ khách hàng</div>
+            </div>
+        </div>
+        <div class="feature__item">
+            <div class="feature__item__img">
+                <img src="{% static 'img/shopping-bag.svg' %}" alt="">
+            </div>
+            <div class="feature__item__text">
+                <div class="feature__item__text__heading">Bảo mật thanh toán 100%</div>
+                <div class="feature__item__text__descrb">Chúng tôi đảm bảo tiền của bạn an toàn</div>
+            </div>
+        </div>
+        <div class="feature__item">
+            <div class="feature__item__img">
+                <img src="{% static 'img/package.svg' %}" alt="">
+            </div>
+            <div class="feature__item__text">
+                <div class="feature__item__text__heading">Chính sách hoàn tiền</div>
+                <div class="feature__item__text__descrb">Hoàn tiền trong vòng 30 ngày</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="homepage__line"></div>
+
+    <div class="homepage__popular-products">
+        <div class="homepage__popular-products__header">
+            <h2>Các loại sản phẩm</h2>
+        </div>
+
+        <div class="homepage__popular-products__body">
+            <div class="homepage__popular-products__item">
+                <img src="{% static 'img/freshfruit.png' %}" alt="">
+                <div class="popular-products__item__info">
+                    <div class="popular-products__item__info__text">
+                        <p class="name">Trái cây</p>
+                    </div>
+                    <div class="popular-products__item__info__cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="homepage__popular-products__item">
+                <img src="{% static 'img/meat.png' %}" alt="">
+                <div class="popular-products__item__info">
+                    <div class="popular-products__item__info__text">
+                        <p class="name">Thịt</p>
+                    </div>
+                    <div class="popular-products__item__info__cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="homepage__popular-products__item">
+                <img src="{% static 'img/freshvegeta.png' %}" alt="">
+                <div class="popular-products__item__info">
+                    <div class="popular-products__item__info__text">
+                        <p class="name">Rau củ</p>
+                    </div>
+                    <div class="popular-products__item__info__cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="homepage__popular-products__item">
+                <img src="{% static 'img/seafood.png' %}" alt="">
+                <div class="popular-products__item__info">
+                    <div class="popular-products__item__info__text">
+                        <p class="name">Hải sản</p>
+                    </div>
+                    <div class="popular-products__item__info__cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="homepage__popular-products__item">
+                <img src="{% static 'img/carbs.jpg' %}" alt="">
+                <div class="popular-products__item__info">
+                    <div class="popular-products__item__info__text">
+                        <p class="name">Lương thực</p>
+                    </div>
+                    <div class="popular-products__item__info__cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <div class="footer__top">
+            <div class="box">
+                <a href="" class="logo">
+                    <img class="logo__img" src="./img/plant 1.svg" alt="">
+                    <span class="logo__text">ORGANIC SHOP</span>
+                </a>
+                <p class="contact-info">
+                    <span>0123456789</span> 
+                    hoặc 
+                    <span>abcd@gmail.com</span>
+                </p>
+                <div class="social-icon">
+                    <a href="">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+    
+            <div class="box">
+                <h2 class="box__header">Tài khoản của tôi</h2>
+                <ul>
+                    <li>Thông tin tài khoản</li>
+                    <li>Lịch sử đặt hàng</li>
+                    <li>Giỏ hàng</li>
+                    <li>Danh sách yêu thích</li>
+                </ul>
+            </div>
+    
+            <div class="box">
+                <h2 class="box__header">Trợ giúp</h2>
+                <ul>
+                    <li>Liên lạc</li>
+                    <li>Điều khoản</li>
+                    <li>Chính sách bảo mật</li>
+                    <li>Hướng dẫn mua hàng</li>
+                </ul>
+            </div>
+    
+            <div class="box">
+                <h2 class="box__header">Danh mục</h2>
+                <ul>
+                    <li>Rau củ quả</li>
+                    <li>Trái cây</li>
+                    <li>Các loại hạt</li>
+                    <li>Nước ép rau củ</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <h2 class="box__header">Tải ứng dụng của chúng tôi</h2>
+                <div class="download">
+                    <a class="ggplay" href="">
+                        <i class="fa-brands fa-google-play ggplay__icon"></i>
+                        <div class="ggplay__text">
+                            <span>Tải xuống trên</span> <br>
+                            Google Play
+                        </div>
+                    </a>
+
+                    <a class="appstore" href="">
+                        <i class="fa-brands fa-apple appstore__icon"></i>
+                        <div class="appstore__text">
+                            <span>Tải xuống trên</span> <br>
+                            App Store
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div>© 2023 - Bản quyền thuộc về Organic Shop</div>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src="./js/banner_countdown.js"></script>
+    <script src="./js/closePopup.js"></script>
+    <script src="./js/proceedToCheckout.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/signup.js"></script>
+</body>
+</html>

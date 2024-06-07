@@ -32,7 +32,7 @@
 
         <div class="header__center">
             <a href="./homepage.html" class="logo">
-                <img class="logo__img" src="./img/plant 1.svg" alt="">
+                <img class="logo__img" src="{% static 'img/plant 1.svg' %}" alt="">
                 <span class="logo__text">ORGANIC SHOP</span>
             </a>
 
@@ -51,27 +51,27 @@
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="./homepage.html">Trang chủ</a>
+                    <a href="{% url 'home' %}">Trang chủ</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./shop.html">Sản phẩm</a>
+                    <a href="{% url 'fruits' %}">Sản phẩm</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./bloglist.html">Bài viết</a>
+                    <a href="{% url 'about' %}">Bài viết</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./about.html">Giới thiệu</a>
+                    <a href="{% url 'shipped_dash' %}">Lịch sử mua hàng</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./contact.html">Liên hệ</a>
+                    <a href="{% url 'not_shipped_dash' %}">Hàng đang giao</a>
                     <hr>
                 </li>
             </ul>
@@ -164,9 +164,7 @@
                             </div>
 
                             <div>
-                                <span class="my-cart__row__minus"><i class="fa-solid fa-minus"></i></span>
-                                <span class="my-cart__row__quantity">2</span>
-                                <span class="my-cart__row__plus"><i class="fa-solid fa-plus"></i></span>
+                                <p>2</p>
                             </div>
         
                             <div>
@@ -184,7 +182,7 @@
                         
                     </div>
                     <div class="my-cart__row button">
-                        <a href="./shop.html">Tiếp tục mua sắm</a>
+                        <a href="{% url 'fruits' %}">Tiếp tục mua sắm</a>
                     </div>
                 </div>
 
@@ -224,7 +222,7 @@
         <div class="footer__top">
             <div class="box">
                 <a href="" class="logo">
-                    <img class="logo__img" src="./img/plant 1.svg" alt="">
+                    <img class="logo__img" src="{% static 'img/plant 1.svg' %}" alt="">
                     <span class="logo__text">ORGANIC SHOP</span>
                 </a>
                 <p class="contact-info">

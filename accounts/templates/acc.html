@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/acc.css">
-    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="{% static 'css/acc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
@@ -54,87 +55,39 @@
             </form>
 
             <div class="wishlist-cart">
-                <a href="./wish-list.html"><i class="fa-regular fa-heart"></i></a>
-                <hr>
-                <a class="js-popup-ticket" href="#"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
+                <a class="js-popup-ticket" href="{% url 'checkout' %}"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
             </div>
         </div>
         
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="./homepage.html">Trang chủ</a>
+                    <a href="{% url 'home' %}">Trang chủ</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./shop.html">Sản phẩm</a>
+                    <a href="{% url 'fruits' %}">Sản phẩm</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./bloglist.html">Bài viết</a>
+                    <a href="{% url 'about' %}">Bài viết</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./about.html">Giới thiệu</a>
+                    <a href="{% url 'shipped_dash' %}">Lịch sử mua hàng</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./contact.html">Liên hệ</a>
+                    <a href="{% url 'not_shipped_dash' %}">Hàng đang giao</a>
                     <hr>
                 </li>
             </ul>
         </div>
     </header>
-
-    <div class="cart-popup-wrapper js-popup">
-        <div class="cart-popup js-popup-container">
-            <div class="cart-popup__up">
-                <div class="cart-popup__heading">
-                    <h2>Giỏ hàng</h2>
-                    <i class="fa-regular fa-x js-close-popup"></i>
-                </div>
-                
-                <div class="cart-popup__products">
-                    <div class="cart-popup__product">
-                        <img class="cart-popup__product__img" src="./img/cải thìa.png" alt="">
-                        <div class="cart-popup__product__info">
-                            <p>Cải thìa</p>
-                            <p>
-                                <span class="product__weight">1kg x </span>
-                                <span class="product__price">10.000đ</span>
-                            </p>
-                        </div>
-                        <img class="cart-popup__product-close" src="./img/Close.svg" alt="">
-                    </div>
-                    <div class="line"></div>
-                    <div class="cart-popup__product">
-                        <img class="cart-popup__product__img" src="./img/ot chuong do.png" alt="">
-                        <div class="cart-popup__product__info">
-                            <p>Ớt chuông đỏ</p>
-                            <p>
-                                <span class="product__weight">1kg x </span>
-                                <span class="product__price">10.000đ</span>
-                            </p>
-                        </div>
-                        <img class="cart-popup__product-close" src="./img/Close.svg" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="cart-popup__footer">
-                <div class="cart-popup__footer__info">
-                    <div>2 sản phẩm</div>
-                    <div class="cart-popup__footer__price">20.000đ</div>
-                </div>
-                <button class="cart-popup__footer__checkout">Thanh toán</button> <br>
-                <button class="cart-popup__footer__cart">Xem giỏ hàng</button>
-            </div>
-        </div>
-    </div>
         
     <div class="address-body">
         <div class="nav-link">
@@ -156,25 +109,13 @@
                         </a>
                     </div>
                     <div class="list__item">
-                        <a href="./sodiachi.html">
+                        <a href="{% url 'update_info' %}">
                             <i class="list__icon fa-solid fa-address-book"></i>
-                            <span>Sổ địa chỉ</span>
-                        </a>
-                    </div>
-                    <div class="list__item ">
-                        <a href="./orderhistory.html">
-                            <i class="list__icon fa-solid fa-wallet"></i>
-                            <span>Lịch sử đặt hàng</span>
+                            <span>Thông tin thanh toán</span>
                         </a>
                     </div>
                     <div class="list__item">
-                        <a href="./account wish-list.html">
-                            <i class="list__icon fa-solid fa-heart "></i>
-                            <span>Danh sách yêu thích</span>
-                        </a>
-                    </div>
-                    <div class="list__item">
-                        <a href="./homepage.html">
+                        <a href="{% url 'logout' %}">
                             <i class="list__icon fa-solid fa-arrow-right-from-bracket"></i>
                             <span>Đăng xuất</span>
                         </a>
@@ -183,100 +124,13 @@
             </div>
           </div>
           <div class="profile">
-            <div class="profilename">
-                <div class="anh">
-                    <img class="anh__icon" src="./img/nghia.jpg" alt="">
-                </div>
-                <p class="ten profilename__ele">Lê Đức Nghĩa</p>    
-            </div>
             <div class="profileinfo">
-                <p class="ten profileinfo__ele">Lê Đức Nghĩa</p>
-                <p class="diachi profileinfo__ele">Địa chỉ: 08 Hà Văn Tính, Hòa Khánh Nam, Liên Chiểu, Đà Nẵng</p>
-                <p class="email profileinfo__ele">Email: cexexoh956@ustorp.com</p>
-                <p class="sdt profileinfo__ele">Sđt: 0941867783</p>
+                <p class="ten profileinfo__ele">{{ first_name }} {{ last_name }}</p>
+                <p class="diachi profileinfo__ele">@{{ username }}</p>
+                <p class="diachi profileinfo__ele">Địa chỉ: {{ address }}</p>
+                <p class="email profileinfo__ele">Email: {{ email }}</p>
+                <p class="sdt profileinfo__ele">Sđt: {{ phone }}</p>
                 <a class="edit profileinfo__ele" href="{% url 'update_user' %}">Sửa thông tin</a>
-            </div>
-            <div class="address-wrapper__order-history">
-                <div class="title">
-                    <i class="fa-solid fa-clock-rotate-left title__icon"></i>
-                    Lịch sử đặt hàng
-                </div>
-                <div class="content">
-                    <div class="content__item header">
-                        <div>ID đơn hàng</div>
-                        <div>Ngày</div>
-                        <div>Tổng giá</div>
-                        <div>Tình trạng</div>
-                        <div></div>
-                    </div>
-                    <div class="content__item">
-                        <div>#3933</div>
-                        <div>1/11/2023</div>
-                        <div>331.300đ (5 sản phẩm)</div>
-                        <div>Đang xử lý</div>
-                        <div class="details">
-                            <a href="./order-detail.html">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__item">
-                        <div>#5054</div>
-                        <div>29/10/2023</div>
-                        <div>61.400đ (1 sản phẩm)</div>
-                        <div>Đang vận chuyển</div>
-                        <div class="details">
-                            <a href="">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__item">
-                        <div>#5028</div>
-                        <div>23/10/2023</div>
-                        <div>613.500đ (4 sản phẩm)</div>
-                        <div>Hoàn thành</div>
-                        <div class="details">
-                            <a href="">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__item">
-                        <div>#4600</div>
-                        <div>19/10/2023</div>
-                        <div>85.900đ (1 sản phẩm)</div>
-                        <div>Hoàn thành</div>
-                        <div class="details">
-                            <a href="">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__item">
-                        <div>#4152</div>
-                        <div>10/10/2023</div>
-                        <div>1.418.500đ (13 sản phẩm)</div>
-                        <div>Hoàn thành</div>
-                        <div class="details">
-                            <a href="">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__item">
-                        <div>#8811</div>
-                        <div>5/10/2023</div>
-                        <div>846.700đ (7 sản phẩm)</div>
-                        <div>Hoàn thành</div>
-                        <div class="details">
-                            <a href="">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__item">
-                        <div>#3536</div>
-                        <div>28/9/2023</div>
-                        <div>1.374.300đ (2 sản phẩm)</div>
-                        <div>Hoàn thành</div>
-                        <div class="details">
-                            <a href="">Chi tiết</a>
-                        </div>
-                    </div>
-                    <div class="content__next-page">
-                        
-                        <a href="#" class="numpage">Xem thêm</a>
-                    </div>
-                </div>
             </div>
           </div>
         </div>

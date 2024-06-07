@@ -30,17 +30,20 @@
         </div>
 
         <div class="header__center">
-            <a href="./homepage.html" class="logo">
-                <img class="logo__img" src="./img/plant 1.svg" alt="">
+            <a href="{% url 'home' %}" class="logo">
+                <img class="logo__img" src="{% static 'img/plant 1.svg' %}" alt="">
                 <span class="logo__text">ORGANIC SHOP</span>
             </a>
 
-            <div class="search-box">
-                <input type="text" class="search-box__input" placeholder="Tìm kiếm sản phẩm">
-                <button class="search-box__btn" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
+
+                <div class="search-box">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="text" class="search-box__input" placeholder="Tìm kiếm sản phẩm" name="searched">
+                    <button class="search-box__btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
 
             <div class="wishlist-cart">
                 <a class="js-popup-ticket" href="#"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
@@ -50,7 +53,7 @@
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="./homepage.html">Trang chủ</a>
+                    <a href="{% url 'home' %}">Trang chủ</a>
                     <hr>
                 </li>
 
@@ -60,17 +63,17 @@
                 </li>
 
                 <li>
-                    <a href="./bloglist.html">Bài viết</a>
+                    <a href="{% url 'about' %}">Bài viết</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./about.html">Giới thiệu</a>
+                    <a href="{% url 'shipped_dash' %}">Lịch sử mua hàng</a>
                     <hr>
                 </li>
 
                 <li>
-                    <a href="./contact.html">Liên hệ</a>
+                    <a href="{% url 'not_shipped_dash' %}">Hàng đang giao</a>
                     <hr>
                 </li>
             </ul>
@@ -81,52 +84,6 @@
         </div>
     </header>
 
-    <div class="cart-popup-wrapper js-popup">
-        <div class="cart-popup js-popup-container">
-            <div class="cart-popup__up">
-                <div class="cart-popup__heading">
-                    <h2>Giỏ hàng</h2>
-                    <i class="fa-regular fa-x js-close-popup"></i>
-                </div>
-                
-                <div class="cart-popup__products">
-                    <div class="cart-popup__product">
-                        <img class="cart-popup__product__img" src="./img/cải thìa.png" alt="">
-                        <div class="cart-popup__product__info">
-                            <p>Cải thìa</p>
-                            <p>
-                                <span class="product__weight">1kg x </span>
-                                <span class="product__price">10.000đ</span>
-                            </p>
-                        </div>
-                        <img class="cart-popup__product-close" src="./img/Close.svg" alt="">
-                    </div>
-                    <div class="line"></div>
-                    <div class="cart-popup__product">
-                        <img class="cart-popup__product__img" src="./img/ot chuong do.png" alt="">
-                        <div class="cart-popup__product__info">
-                            <p>Ớt chuông đỏ</p>
-                            <p>
-                                <span class="product__weight">1kg x </span>
-                                <span class="product__price">10.000đ</span>
-                            </p>
-                        </div>
-                        <img class="cart-popup__product-close" src="./img/Close.svg" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="cart-popup__footer">
-                <div class="cart-popup__footer__info">
-                    <div>2 sản phẩm</div>
-                    <div class="cart-popup__footer__price">20.000đ</div>
-                </div>
-                <button class="cart-popup__footer__checkout">Thanh toán</button> <br>
-                <button class="cart-popup__footer__cart">Xem giỏ hàng</button>
-            </div>
-        </div>
-    </div>
-
     <div class="nav-link">
         <div class="nav-link-text">
             <a href="./homepage.html"><i class="fa-solid fa-house"></i></a>
@@ -136,12 +93,10 @@
     </div>
     <div class="body">
         <div class="formedit">
-            <label for="" class="formedit__title">Thông tin cá nhân</label>
+            <label for="" class="formedit__title">Thông tin thanh toán</label>
         {% if user.is_authenticated %}
             <form method="POST" action="{% url 'update_info' %}">
             {% csrf_token%}
-            {{ form.as_p }}
-            <br/><br/>
             {{ shipping_form.as_p }}
             <button type="submit" style="margin-left: 20px;">Cập nhật</button>
             </form>
@@ -155,7 +110,7 @@
         <div class="footer__top">
             <div class="box">
                 <a href="" class="logo">
-                    <img class="logo__img" src="./img/plant 1.svg" alt="">
+                    <img class="logo__img" src="{% static 'img/plant 1.svg' %}" alt="">
                     <span class="logo__text">ORGANIC SHOP</span>
                 </a>
                 <p class="contact-info">

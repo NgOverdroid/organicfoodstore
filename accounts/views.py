@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateProfileForm, ChangePasswordForm, UserInfoForm
@@ -12,7 +13,16 @@ import json
 
 # Create your views here.
 def profile(request):
-    return render(request, "acc.html")
+    if request.user.is_authenticated:
+        current_user = User.objects.get(id=request.user.id)
+        return render(request, "acc.html", {
+            "username": current_user.username,
+            "first_name": current_user.first_name,
+            "last_name": current_user.last_name,
+            "email": current_user.email
+        })
+    else:
+        return redirect('home')
 
 def login_user(request):
     if request.user.is_authenticated:
@@ -105,19 +115,52 @@ def update_password(request):
         messages.success(request, "Bạn chưa đăng nhập")
         return redirect('home')
     
+@login_required
 def update_info(request):
-	if request.user.is_authenticated:
-		current_user = Profile.objects.get(user__id=request.user.id)# Get Current User
-		shipping_user = ShippingAddress.objects.get(user__id=request.user.id)# Get Current User's Shipping Info
+    user = request.user
+    
+    try:
+        # Get or create current user's profile
+        current_user_profile = Profile.objects.get(user=user)
+    except Profile.DoesNotExist:
+        current_user_profile = Profile.objects.create(user=user)
+    
+    shipping_address, created = ShippingAddress.objects.get_or_create(user=user)
+    
+    if request.method == 'POST':
+        shipping_form = ShippingForm(request.POST, instance=shipping_address)
+        
+        if shipping_form.is_valid():
+            shipping_form.save()
+            messages.success(request, "Cập nhật thành công")
+            return redirect('profile')
+        else:
+            messages.error(request, "Có lỗi xảy ra trong quá trình cập nhật.")
+    else:
+        form = UserInfoForm(instance=current_user_profile)
+        shipping_form = ShippingForm(instance=shipping_address)
+    
+    return render(request, "update_info.html", {
+        'form': form,
+        'shipping_form': shipping_form
+    })
+    
+# def update_info(request):
+# 	if request.user.is_authenticated:
+# 		current_user = Profile.objects.get(user__id=request.user.id)# Get Current User
+# 		shipping_user = ShippingAddress.objects.get(user__id=request.user.id)# Get Current User's Shipping Info
 		
-		form = UserInfoForm(request.POST or None, instance=current_user)# Get original User Form
-		shipping_form = ShippingForm(request.POST or None, instance=shipping_user)	# Get User's Shipping Form	
-		if form.is_valid() or shipping_form.is_valid():
-			form.save() # Save original form
-			shipping_form.save() #save shipping form
-			messages.success(request, "Cập nhật thành công")
-			return redirect('profile')
-		return render(request, "update_info.html", {'form':form, 'shipping_form':shipping_form})
-	else:
-		messages.success(request, "Bạn chưa đăng nhập")
-		return redirect('login')
+# 		form = UserInfoForm(request.POST or None, instance=current_user)# Get original User Form
+# 		shipping_form = ShippingForm(request.POST or None, instance=shipping_user)	# Get User's Shipping Form	
+# 		if form.is_valid() or shipping_form.is_valid():
+# 			form.save() # Save original form
+# 			shipping_form.save() #save shipping form
+# 			messages.success(request, "Cập nhật thành công")
+# 			return redirect('profile')
+# 		return render(request, "update_info.html", {
+#             'form':form, 
+#             'shipping_form':shipping_form
+#         })
+# 	else:
+# 		messages.success(request, "Bạn chưa đăng nhập")
+# 		return redirect('login')

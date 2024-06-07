@@ -3,6 +3,14 @@ from .models import Product, Category
 from django.contrib import messages
 from django.db.models import Q
 # Create your views here.
+def home(request):
+    categories = Category.objects.all()
+    products = Product.objects.all()[:5]
+    return render(request, 'homepage.html', {
+        'categories': categories,
+        'products': products
+    })
+
 def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
@@ -45,6 +53,16 @@ def seafood(request):
     return render(request, 'seafood.html', {
         'products': products
     })
+
+def carbs(request):
+    carbs = Category.objects.get(name='Lương thực')
+    products = Product.objects.filter(category = carbs)
+    return render(request, 'carbs.html', {
+        'products': products
+    })
+
+def about(request):
+    return render(request, "about.html", {})
 
 # def category(request, ctgy):
 #     category = Category.objects.get(name=ctgy)
