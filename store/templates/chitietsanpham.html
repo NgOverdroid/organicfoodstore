@@ -48,14 +48,14 @@
             </form>
 
             <div class="wishlist-cart">
-                <a class="js-popup-ticket" href="#"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
+                <a class="js-popup-ticket" href="{% url 'cart_summary' %}"><i class="js-popup-ticket fa-solid fa-cart-shopping"></i></a>
             </div>
         </div>
         
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="./homepage.html">Trang chủ</a>
+                    <a href="{% url 'home' %}">Trang chủ</a>
                     <hr>
                 </li>
 

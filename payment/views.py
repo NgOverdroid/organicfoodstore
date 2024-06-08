@@ -116,10 +116,10 @@ def process_order(request):
                     # Delete the key
                     del request.session[key]
         messages.success(request, "Đặt hàng thành công")
-        return redirect('fruits')
+        return redirect('home')
     else:
         messages.success(request, "Không truy cập được")
-        return redirect('fruits')
+        return redirect('home')
 
 def billing_info(request):
     if request.POST:
