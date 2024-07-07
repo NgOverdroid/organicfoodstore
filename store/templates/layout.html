@@ -187,7 +187,22 @@
         </div>
     </footer>
     <script>
-        
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectElement = document.querySelector(".filter-option__child");
+            selectElement.addEventListener("change", function() {
+                const selectedValue = selectElement.value;
+                if (selectedValue) {
+                    const urls = {
+                        'fruits': '{% url "fruits" %}',
+                        'vegetables': '{% url "vegetables" %}',
+                        'seafood': '{% url "seafood" %}',
+                        'meat': '{% url "meat" %}',
+                        'carbs': '{% url "carbs" %}'
+                    };
+                    window.location.href = urls[selectedValue];
+                }
+            });
+        });
     </script>
 </body>
 </html>
